@@ -1,0 +1,658 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DigiFusionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ContactNumber" Type="nchar" MaxLength="10" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Designer">
+          <Key>
+            <PropertyRef Name="DesignerID" />
+          </Key>
+          <Property Name="DesignerID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ContactNumber" Type="nchar" MaxLength="10" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobCard">
+          <Key>
+            <PropertyRef Name="JobCardID" />
+          </Key>
+          <Property Name="JobCardID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DesignerID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="JobDate" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="QuoteRef" Type="nvarchar(max)" />
+          <Property Name="JobTypeID" Type="uniqueidentifier" />
+          <Property Name="MaterialID" Type="uniqueidentifier" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="TaskStep" Type="int" Nullable="false" />
+          <Property Name="CreatedID" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UVPrinterID" Type="int" />
+          <Property Name="UVPrintedDate" Type="datetime" />
+          <Property Name="ApplicationID" Type="int" />
+          <Property Name="ApplicationDate" Type="datetime" />
+          <Property Name="CladingID" Type="int" />
+          <Property Name="CladingDate" Type="datetime" />
+          <Property Name="InstallID" Type="int" />
+          <Property Name="InstalDate" Type="datetime" />
+          <Property Name="InvoiceID" Type="int" />
+          <Property Name="InvoiceDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="JobType">
+          <Key>
+            <PropertyRef Name="JobTypeID" />
+          </Key>
+          <Property Name="JobTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="MaterialID" />
+          </Key>
+          <Property Name="MaterialID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="CreatedSYSUserID" Type="int" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="ModifiedSYSUserID" Type="int" Nullable="false" />
+          <Property Name="ModifiedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SYSUser">
+          <Key>
+            <PropertyRef Name="SYSUserID" />
+          </Key>
+          <Property Name="SYSUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordEncryptedText" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreatedSYSUserID" Type="int" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="ModifiedSYSUserID" Type="int" Nullable="false" />
+          <Property Name="ModifiedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SYSUserProfile">
+          <Key>
+            <PropertyRef Name="SYSUserProfileID" />
+          </Key>
+          <Property Name="SYSUserProfileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SYSUserID" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CreatedSYSUserID" Type="int" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="ModifiedSYSUserID" Type="int" Nullable="false" />
+          <Property Name="ModifiedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SYSUserRole">
+          <Key>
+            <PropertyRef Name="SYSUserRoleID" />
+          </Key>
+          <Property Name="SYSUserRoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SYSUserID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedSYSUserID" Type="int" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="ModifiedSYSUserID" Type="int" Nullable="false" />
+          <Property Name="ModifiedDateTime" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__SYSUserPr__SYSUs__49C3F6B7">
+          <End Role="SYSUser" Type="Self.SYSUser" Multiplicity="1" />
+          <End Role="SYSUserProfile" Type="Self.SYSUserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYSUser">
+              <PropertyRef Name="SYSUserID" />
+            </Principal>
+            <Dependent Role="SYSUserProfile">
+              <PropertyRef Name="SYSUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SYSUserRo__RoleI__4F7CD00D">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="SYSUserRole" Type="Self.SYSUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="SYSUserRole">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SYSUserRo__SYSUs__5070F446">
+          <End Role="SYSUser" Type="Self.SYSUser" Multiplicity="1" />
+          <End Role="SYSUserRole" Type="Self.SYSUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYSUser">
+              <PropertyRef Name="SYSUserID" />
+            </Principal>
+            <Dependent Role="SYSUserRole">
+              <PropertyRef Name="SYSUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobCard_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="JobCard" Type="Self.JobCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="JobCard">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobCard_JobCard">
+          <End Role="Designer" Type="Self.Designer" Multiplicity="1" />
+          <End Role="JobCard" Type="Self.JobCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Designer">
+              <PropertyRef Name="DesignerID" />
+            </Principal>
+            <Dependent Role="JobCard">
+              <PropertyRef Name="DesignerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobCard_JobType">
+          <End Role="JobType" Type="Self.JobType" Multiplicity="0..1" />
+          <End Role="JobCard" Type="Self.JobCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobType">
+              <PropertyRef Name="JobTypeID" />
+            </Principal>
+            <Dependent Role="JobCard">
+              <PropertyRef Name="JobTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobCard_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="0..1" />
+          <End Role="JobCard" Type="Self.JobCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="MaterialID" />
+            </Principal>
+            <Dependent Role="JobCard">
+              <PropertyRef Name="MaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DigiFusionModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Designer" EntityType="Self.Designer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobCard" EntityType="Self.JobCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobType" EntityType="Self.JobType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYSUser" EntityType="Self.SYSUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYSUserProfile" EntityType="Self.SYSUserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYSUserRole" EntityType="Self.SYSUserRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__SYSUserPr__SYSUs__49C3F6B7" Association="Self.FK__SYSUserPr__SYSUs__49C3F6B7">
+            <End Role="SYSUser" EntitySet="SYSUser" />
+            <End Role="SYSUserProfile" EntitySet="SYSUserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SYSUserRo__RoleI__4F7CD00D" Association="Self.FK__SYSUserRo__RoleI__4F7CD00D">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="SYSUserRole" EntitySet="SYSUserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SYSUserRo__SYSUs__5070F446" Association="Self.FK__SYSUserRo__SYSUs__5070F446">
+            <End Role="SYSUser" EntitySet="SYSUser" />
+            <End Role="SYSUserRole" EntitySet="SYSUserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobCard_Customer" Association="Self.FK_JobCard_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="JobCard" EntitySet="JobCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobCard_JobCard" Association="Self.FK_JobCard_JobCard">
+            <End Role="Designer" EntitySet="Designer" />
+            <End Role="JobCard" EntitySet="JobCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobCard_JobType" Association="Self.FK_JobCard_JobType">
+            <End Role="JobType" EntitySet="JobType" />
+            <End Role="JobCard" EntitySet="JobCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobCard_Material" Association="Self.FK_JobCard_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="JobCard" EntitySet="JobCard" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DigiFusionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="JobCards" Relationship="Self.FK_JobCard_Customer" FromRole="Customer" ToRole="JobCard" />
+        </EntityType>
+        <EntityType Name="Designer">
+          <Key>
+            <PropertyRef Name="DesignerID" />
+          </Key>
+          <Property Name="DesignerID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="JobCards" Relationship="Self.FK_JobCard_JobCard" FromRole="Designer" ToRole="JobCard" />
+        </EntityType>
+        <EntityType Name="JobCard">
+          <Key>
+            <PropertyRef Name="JobCardID" />
+          </Key>
+          <Property Name="JobCardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Guid" Nullable="false" />
+          <Property Name="DesignerID" Type="Guid" Nullable="false" />
+          <Property Name="JobDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="QuoteRef" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JobTypeID" Type="Guid" />
+          <Property Name="MaterialID" Type="Guid" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_JobCard_Customer" FromRole="JobCard" ToRole="Customer" />
+          <NavigationProperty Name="Designer" Relationship="Self.FK_JobCard_JobCard" FromRole="JobCard" ToRole="Designer" />
+          <NavigationProperty Name="JobType" Relationship="Self.FK_JobCard_JobType" FromRole="JobCard" ToRole="JobType" />
+          <NavigationProperty Name="Material" Relationship="Self.FK_JobCard_Material" FromRole="JobCard" ToRole="Material" />
+          <Property Name="TaskStep" Type="Int32" Nullable="false" />
+          <Property Name="CreatedID" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UVPrinterID" Type="Int32" />
+          <Property Name="UVPrintedDate" Type="DateTime" Precision="3" />
+          <Property Name="ApplicationID" Type="Int32" />
+          <Property Name="ApplicationDate" Type="DateTime" Precision="3" />
+          <Property Name="CladingID" Type="Int32" />
+          <Property Name="CladingDate" Type="DateTime" Precision="3" />
+          <Property Name="InstallID" Type="Int32" />
+          <Property Name="InstalDate" Type="DateTime" Precision="3" />
+          <Property Name="InvoiceID" Type="Int32" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="JobType">
+          <Key>
+            <PropertyRef Name="JobTypeID" />
+          </Key>
+          <Property Name="JobTypeID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="JobCards" Relationship="Self.FK_JobCard_JobType" FromRole="JobType" ToRole="JobCard" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="MaterialID" />
+          </Key>
+          <Property Name="MaterialID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="JobCards" Relationship="Self.FK_JobCard_Material" FromRole="Material" ToRole="JobCard" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedSYSUserID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedSYSUserID" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SYSUserRoles" Relationship="Self.FK__SYSUserRo__RoleI__4F7CD00D" FromRole="Role" ToRole="SYSUserRole" />
+        </EntityType>
+        <EntityType Name="SYSUser">
+          <Key>
+            <PropertyRef Name="SYSUserID" />
+          </Key>
+          <Property Name="SYSUserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PasswordEncryptedText" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedSYSUserID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedSYSUserID" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SYSUserProfiles" Relationship="Self.FK__SYSUserPr__SYSUs__49C3F6B7" FromRole="SYSUser" ToRole="SYSUserProfile" />
+          <NavigationProperty Name="SYSUserRoles" Relationship="Self.FK__SYSUserRo__SYSUs__5070F446" FromRole="SYSUser" ToRole="SYSUserRole" />
+        </EntityType>
+        <EntityType Name="SYSUserProfile">
+          <Key>
+            <PropertyRef Name="SYSUserProfileID" />
+          </Key>
+          <Property Name="SYSUserProfileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SYSUserID" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CreatedSYSUserID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedSYSUserID" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SYSUser" Relationship="Self.FK__SYSUserPr__SYSUs__49C3F6B7" FromRole="SYSUserProfile" ToRole="SYSUser" />
+        </EntityType>
+        <EntityType Name="SYSUserRole">
+          <Key>
+            <PropertyRef Name="SYSUserRoleID" />
+          </Key>
+          <Property Name="SYSUserRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SYSUserID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedSYSUserID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedSYSUserID" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__SYSUserRo__RoleI__4F7CD00D" FromRole="SYSUserRole" ToRole="Role" />
+          <NavigationProperty Name="SYSUser" Relationship="Self.FK__SYSUserRo__SYSUs__5070F446" FromRole="SYSUserRole" ToRole="SYSUser" />
+        </EntityType>
+        <Association Name="FK_JobCard_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="JobCard" Type="Self.JobCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="JobCard">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobCard_JobCard">
+          <End Role="Designer" Type="Self.Designer" Multiplicity="1" />
+          <End Role="JobCard" Type="Self.JobCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Designer">
+              <PropertyRef Name="DesignerID" />
+            </Principal>
+            <Dependent Role="JobCard">
+              <PropertyRef Name="DesignerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobCard_JobType">
+          <End Role="JobType" Type="Self.JobType" Multiplicity="0..1" />
+          <End Role="JobCard" Type="Self.JobCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobType">
+              <PropertyRef Name="JobTypeID" />
+            </Principal>
+            <Dependent Role="JobCard">
+              <PropertyRef Name="JobTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobCard_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="0..1" />
+          <End Role="JobCard" Type="Self.JobCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="MaterialID" />
+            </Principal>
+            <Dependent Role="JobCard">
+              <PropertyRef Name="MaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SYSUserRo__RoleI__4F7CD00D">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="SYSUserRole" Type="Self.SYSUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="SYSUserRole">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SYSUserPr__SYSUs__49C3F6B7">
+          <End Role="SYSUser" Type="Self.SYSUser" Multiplicity="1" />
+          <End Role="SYSUserProfile" Type="Self.SYSUserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYSUser">
+              <PropertyRef Name="SYSUserID" />
+            </Principal>
+            <Dependent Role="SYSUserProfile">
+              <PropertyRef Name="SYSUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SYSUserRo__SYSUs__5070F446">
+          <End Role="SYSUser" Type="Self.SYSUser" Multiplicity="1" />
+          <End Role="SYSUserRole" Type="Self.SYSUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYSUser">
+              <PropertyRef Name="SYSUserID" />
+            </Principal>
+            <Dependent Role="SYSUserRole">
+              <PropertyRef Name="SYSUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DigiFusionEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Designers" EntityType="Self.Designer" />
+          <EntitySet Name="JobCards" EntityType="Self.JobCard" />
+          <EntitySet Name="JobTypes" EntityType="Self.JobType" />
+          <EntitySet Name="Materials" EntityType="Self.Material" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="SYSUsers" EntityType="Self.SYSUser" />
+          <EntitySet Name="SYSUserProfiles" EntityType="Self.SYSUserProfile" />
+          <EntitySet Name="SYSUserRoles" EntityType="Self.SYSUserRole" />
+          <AssociationSet Name="FK_JobCard_Customer" Association="Self.FK_JobCard_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="JobCard" EntitySet="JobCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobCard_JobCard" Association="Self.FK_JobCard_JobCard">
+            <End Role="Designer" EntitySet="Designers" />
+            <End Role="JobCard" EntitySet="JobCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobCard_JobType" Association="Self.FK_JobCard_JobType">
+            <End Role="JobType" EntitySet="JobTypes" />
+            <End Role="JobCard" EntitySet="JobCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobCard_Material" Association="Self.FK_JobCard_Material">
+            <End Role="Material" EntitySet="Materials" />
+            <End Role="JobCard" EntitySet="JobCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SYSUserRo__RoleI__4F7CD00D" Association="Self.FK__SYSUserRo__RoleI__4F7CD00D">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="SYSUserRole" EntitySet="SYSUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SYSUserPr__SYSUs__49C3F6B7" Association="Self.FK__SYSUserPr__SYSUs__49C3F6B7">
+            <End Role="SYSUser" EntitySet="SYSUsers" />
+            <End Role="SYSUserProfile" EntitySet="SYSUserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SYSUserRo__SYSUs__5070F446" Association="Self.FK__SYSUserRo__SYSUs__5070F446">
+            <End Role="SYSUser" EntitySet="SYSUsers" />
+            <End Role="SYSUserRole" EntitySet="SYSUserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DigiFusionModelStoreContainer" CdmEntityContainer="DigiFusionEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="DigiFusionModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Designers">
+            <EntityTypeMapping TypeName="DigiFusionModel.Designer">
+              <MappingFragment StoreEntitySet="Designer">
+                <ScalarProperty Name="DesignerID" ColumnName="DesignerID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobCards">
+            <EntityTypeMapping TypeName="DigiFusionModel.JobCard">
+              <MappingFragment StoreEntitySet="JobCard">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+                <ScalarProperty Name="InstalDate" ColumnName="InstalDate" />
+                <ScalarProperty Name="InstallID" ColumnName="InstallID" />
+                <ScalarProperty Name="CladingDate" ColumnName="CladingDate" />
+                <ScalarProperty Name="CladingID" ColumnName="CladingID" />
+                <ScalarProperty Name="ApplicationDate" ColumnName="ApplicationDate" />
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="UVPrintedDate" ColumnName="UVPrintedDate" />
+                <ScalarProperty Name="UVPrinterID" ColumnName="UVPrinterID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedID" ColumnName="CreatedID" />
+                <ScalarProperty Name="TaskStep" ColumnName="TaskStep" />
+                <ScalarProperty Name="JobCardID" ColumnName="JobCardID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="DesignerID" ColumnName="DesignerID" />
+                <ScalarProperty Name="JobDate" ColumnName="JobDate" />
+                <ScalarProperty Name="QuoteRef" ColumnName="QuoteRef" />
+                <ScalarProperty Name="JobTypeID" ColumnName="JobTypeID" />
+                <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobTypes">
+            <EntityTypeMapping TypeName="DigiFusionModel.JobType">
+              <MappingFragment StoreEntitySet="JobType">
+                <ScalarProperty Name="JobTypeID" ColumnName="JobTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materials">
+            <EntityTypeMapping TypeName="DigiFusionModel.Material">
+              <MappingFragment StoreEntitySet="Material">
+                <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DigiFusionModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedSYSUserID" ColumnName="CreatedSYSUserID" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ModifiedSYSUserID" ColumnName="ModifiedSYSUserID" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYSUsers">
+            <EntityTypeMapping TypeName="DigiFusionModel.SYSUser">
+              <MappingFragment StoreEntitySet="SYSUser">
+                <ScalarProperty Name="SYSUserID" ColumnName="SYSUserID" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="PasswordEncryptedText" ColumnName="PasswordEncryptedText" />
+                <ScalarProperty Name="CreatedSYSUserID" ColumnName="CreatedSYSUserID" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ModifiedSYSUserID" ColumnName="ModifiedSYSUserID" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYSUserProfiles">
+            <EntityTypeMapping TypeName="DigiFusionModel.SYSUserProfile">
+              <MappingFragment StoreEntitySet="SYSUserProfile">
+                <ScalarProperty Name="SYSUserProfileID" ColumnName="SYSUserProfileID" />
+                <ScalarProperty Name="SYSUserID" ColumnName="SYSUserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="CreatedSYSUserID" ColumnName="CreatedSYSUserID" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ModifiedSYSUserID" ColumnName="ModifiedSYSUserID" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYSUserRoles">
+            <EntityTypeMapping TypeName="DigiFusionModel.SYSUserRole">
+              <MappingFragment StoreEntitySet="SYSUserRole">
+                <ScalarProperty Name="SYSUserRoleID" ColumnName="SYSUserRoleID" />
+                <ScalarProperty Name="SYSUserID" ColumnName="SYSUserID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedSYSUserID" ColumnName="CreatedSYSUserID" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ModifiedSYSUserID" ColumnName="ModifiedSYSUserID" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

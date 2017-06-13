@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4efcd8c76b334d8aa1e4a9dc46fea66c" Name="Diagram1">
+        <EntityTypeShape EntityType="DigiFusionModel.Customer" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigiFusionModel.Designer" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigiFusionModel.JobCard" Width="1.5" PointX="3.375" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigiFusionModel.JobType" Width="1.5" PointX="5.625" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigiFusionModel.Material" Width="1.5" PointX="5.875" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigiFusionModel.Role" Width="1.5" PointX="6.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigiFusionModel.SYSUser" Width="1.5" PointX="2.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigiFusionModel.SYSUserProfile" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DigiFusionModel.SYSUserRole" Width="1.5" PointX="4.625" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="DigiFusionModel.FK_JobCard_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="DigiFusionModel.FK_JobCard_JobCard" ManuallyRouted="false" />
+        <AssociationConnector Association="DigiFusionModel.FK_JobCard_JobType" ManuallyRouted="false" />
+        <AssociationConnector Association="DigiFusionModel.FK_JobCard_Material" ManuallyRouted="false" />
+        <AssociationConnector Association="DigiFusionModel.FK__SYSUserRo__RoleI__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="DigiFusionModel.FK__SYSUserPr__SYSUs__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="DigiFusionModel.FK__SYSUserRo__SYSUs__5070F446" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

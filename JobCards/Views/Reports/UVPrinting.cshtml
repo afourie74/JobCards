@@ -1,0 +1,71 @@
+﻿@model IEnumerable<JobCards.Models.ViewModel.JobCardView>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of Job Cards (UV Printing)</h2>
+<table class="table table-striped table-condensed table-hover">
+    <thead>
+        <tr>
+            <th>Job Number</th>
+            <th>Customer</th>
+            <th>Designer</th>
+            <th>Date</th>
+            <th>Quote</th>
+            <th>Job Type</th>
+            <th>Material</th>
+            <th>Next Task</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td> @Html.DisplayFor(m => i.JobCardID)</td>
+                <td> @Html.DisplayFor(m => i.Customers.Single(x => x.CustomerID == i.CustomerID).Name)</td>
+                <td> @Html.DisplayFor(m => i.Designers.Single(x => x.DesignerID == i.DesignerID).Name)</td>
+                <td> @Html.DisplayFor(m => i.JobDate)</td>
+                <td> @Html.DisplayFor(m => i.QuoteRef)</td>
+                <td> @Html.DisplayFor(m => i.JobTypes.Single(x => x.JobTypeID == i.JobTypeID).Name)</td>
+                <td> @Html.DisplayFor(m => i.Materials.Single(x => x.MaterialID == i.MaterialID).Name)</td>
+                <td> @Context.User.Identity.Name</td>
+                @switch (i.TaskStep)
+                {
+                    case JobCards.Models.ViewModel.TaskStep.Created:
+                        <td>@Html.ActionLink("UV Printing", "UVPrinted", new { id = i.JobCardID })</td>
+                        break;
+                    case JobCards.Models.ViewModel.TaskStep.UVPrint:
+                        <td>@Html.ActionLink("Application", "Application", new { id = i.JobCardID })</td>
+                        break;
+                    case JobCards.Models.ViewModel.TaskStep.Application:
+                        <td>@Html.ActionLink("Clading", "Clading", new { id = i.JobCardID })</td>
+                        break;
+                    case JobCards.Models.ViewModel.TaskStep.Clading:
+                        <td>@Html.ActionLink("Installation", "Installation", new { id = i.JobCardID })</td>
+                        break;
+                    case JobCards.Models.ViewModel.TaskStep.Install:
+                        <td>@Html.ActionLink("Invoicing", "Invoice", new { id = i.JobCardID })</td>
+                        break;
+                    default:
+                        <td>@Html.ActionLink("Completed", "History", new { id = i.JobCardID })</td>
+                        break;
+                }
+
+                @if (Context.User.IsInRole("Admin"))
+                {
+                    <td>@Html.ActionLink("Edit", "Edit", new { id = i.JobCardID })</td>
+                    <td>@Html.ActionLink("Delete", "Delete", new { id = i.JobCardID })</td>
+                }
+                else
+                {
+                    <td></td>
+                    <td></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+

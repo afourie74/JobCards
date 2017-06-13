@@ -1,0 +1,89 @@
+﻿@model JobCards.Models.ViewModel.JobCardView
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.JobCardID = Model.JobCardID;
+}
+
+<h2>Delete Job Card</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />    
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.JobCardID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobCardID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customers.Single(x => x.CustomerID == model.CustomerID).Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DesignerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Designers.Single(x => x.DesignerID == model.DesignerID).Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuoteRef)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuoteRef)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users.Single(x => x.UserID == model.CreatedID).LoginName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.JobCardID)
+        @Html.HiddenFor(model => model.JobDate)
+        @Html.HiddenFor(model => model.Description)
+        @Html.HiddenFor(model => model.CustomerID)
+        @Html.HiddenFor(model => model.Description)
+        @Html.HiddenFor(model => model.QuoteRef)
+        @Html.HiddenFor(model => model.CreatedID)
+        @Html.HiddenFor(model => model.CreatedDate)
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default"  /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

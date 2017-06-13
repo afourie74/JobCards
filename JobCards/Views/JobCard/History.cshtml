@@ -1,0 +1,243 @@
+﻿@model JobCards.Models.ViewModel.JobCardView
+
+@{
+    ViewBag.Title = "Job Card";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Job Card History</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.JobCardID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.JobCardID, new { htmlAttributes = new { @class = "form-control", @readonly="readonly" } })
+            </div>
+        </div>  
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerID, htmlAttributes: new { @class = "control-label col-md-2", @readonly = "readonly" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(
+                    model => model.CustomerID,
+                    Model.Customers.Select(h => new SelectListItem
+                    {
+                        Text = h.Name,
+                        Value = h.CustomerID.ToString()
+                    }),
+                    "Select Customer",
+                    new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>     
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DesignerID, htmlAttributes: new { @class = "control-label col-md-2", @readonly = "readonly" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(
+                    model => model.DesignerID,
+                    Model.Designers.Select(h => new SelectListItem
+                    {
+                        Text = h.Name,
+                        Value = h.DesignerID.ToString()
+                    }),
+                    "Select Designer",
+                    new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>  
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = "5", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.JobDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.JobDateString, new { htmlAttributes = new { @class = "form-control", @readonly="readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.QuoteRef, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.QuoteRef, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.JobTypeID, htmlAttributes: new { @class = "control-label col-md-2", @readonly = "readonly" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(
+                    model => model.JobTypeID,
+                    Model.JobTypes.Select(h => new SelectListItem
+                    {
+                        Text = h.Name,
+                        Value = h.JobTypeID.ToString()
+                    }),
+                    "Select Job Type",
+                    new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>  
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaterialID, htmlAttributes: new { @class = "control-label col-md-2", @readonly = "readonly" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(
+                    model => model.MaterialID,
+                    Model.Materials.Select(h => new SelectListItem
+                    {
+                        Text = h.Name,
+                        Value = h.MaterialID.ToString()
+                    }),
+                    "Select Material",
+                    new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>  
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatedID, htmlAttributes: new { @class = "control-label col-md-2", @readonly = "readonly" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(
+                    model => model.CreatedID,
+                    Model.Users.Select(h => new SelectListItem
+                    {
+                        Text = h.LoginName,
+                        Value = h.UserID.ToString()
+                    }),
+                    "",
+                    new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>  
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UVPrinterID, htmlAttributes: new { @class = "control-label col-md-2", @readonly = "readonly" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(
+                    model => model.UVPrinterID,
+                    Model.Users.Select(h => new SelectListItem
+                    {
+                        Text = h.LoginName,
+                        Value = h.UserID.ToString()
+                    }),
+                    "",
+                    new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>  
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UVPrintedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UVPrintedDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ApplicationID, htmlAttributes: new { @class = "control-label col-md-2", @readonly = "readonly" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(
+                    model => model.ApplicationID,
+                    Model.Users.Select(h => new SelectListItem
+                    {
+                        Text = h.LoginName,
+                        Value = h.UserID.ToString()
+                    }),
+                    "",
+                    new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>  
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ApplicationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ApplicationDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CladingID, htmlAttributes: new { @class = "control-label col-md-2", @readonly = "readonly" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(
+                    model => model.CladingID,
+                    Model.Users.Select(h => new SelectListItem
+                    {
+                        Text = h.LoginName,
+                        Value = h.UserID.ToString()
+                    }),
+                    "",
+                    new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>  
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CladingDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CladingDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.InstallID, htmlAttributes: new { @class = "control-label col-md-2", @readonly = "readonly" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(
+                    model => model.InstallID,
+                    Model.Users.Select(h => new SelectListItem
+                    {
+                        Text = h.LoginName,
+                        Value = h.UserID.ToString()
+                    }),
+                    "",
+                    new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>  
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.InstallDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.InstallDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.InvoiceID, htmlAttributes: new { @class = "control-label col-md-2", @readonly = "readonly" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(
+                    model => model.InvoiceID,
+                    Model.Users.Select(h => new SelectListItem
+                    {
+                        Text = h.LoginName,
+                        Value = h.UserID.ToString()
+                    }),
+                    "",
+                    new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>  
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.InvoiceDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.InvoiceDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

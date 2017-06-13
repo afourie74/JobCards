@@ -1,0 +1,12 @@
+﻿@model JobCards.Models.ViewModel.JobCardView
+@{
+    ViewBag.Title = "Clading";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Clading</h2>
+<br />
+<h3>By clicking the "I confirm" button you are confirming that the <b>Clading</b> for job number @Model.JobCardID has been completed.</h3>
+<br />
+<br />
+<input type="submit" value="I confirm" onclick="location.href='@Url.Action("CladingResult", Model)'" />
